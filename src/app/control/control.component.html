@@ -1,0 +1,9 @@
+<section class="outer"
+         cdkDropList>
+    <div class="inner"
+         cdkDragBoundary=".outer"
+         cdkDrag cdkDragLockAxis="y"
+         (cdkDragMoved)="onDrag($event)"
+         (cdkDragEnded)="onDrop($event)">
+    </div>
+</section>

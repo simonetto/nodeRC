@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Joystick } from './joystick';
+import { JoystickService } from './joystick.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,54 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'rover-client';
+  title = 'Rover Client';
+  joystick;
+
+  constructor() {
+      this.joystick = new Joystick();
+  }
+
+  pads = {
+      KeyW : {
+          side : 'left',
+          value : -1
+      },
+      KeyS : {
+          side : 'left',
+          value : 1
+      },
+      ArrowUp : {
+          side : 'right',
+          value : -1
+      },
+      ArrowDown : {
+          side : 'right',
+          value : 1
+      }
+  }
+
+  keys = Object.keys(this.pads);
+
+  onKeyUp(event: any) {
+      const key = event.code;
+      if (this.keys.indexOf(key) >= 0) {
+          const side = this.pads[key].side;
+          this.joystick[side] = 0;
+          console.log(this.joystick)
+      }
+  }
+
+  onKeyDown(event: any) {
+      const key = event.code;
+      if (this.keys.indexOf(key) >= 0) {
+          const side = this.pads[key].side;
+          const previous = this.joystick[side];
+          const current = this.pads[key].value;
+
+          if (previous !== current) {
+              this.joystick[side] = current;
+              console.log(this.joystick)
+          }
+      }
+  }
 }
