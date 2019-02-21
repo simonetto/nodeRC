@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { JoystickService } from './joystick.service';
+import { SocketService } from './socket.service';
 
-describe('JoystickService', () => {
+describe('SocketService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: JoystickService = TestBed.get(JoystickService);
+    const service: SocketService = TestBed.get(SocketService);
     expect(service).toBeTruthy();
   });
 });

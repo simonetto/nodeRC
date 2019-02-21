@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Joystick } from './joystick';
-import { JoystickService } from './joystick.service';
+import { SocketService } from './socket.service';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +11,7 @@ export class AppComponent {
   title = 'Rover Client';
   joystick;
 
-  constructor() {
+  constructor(private socketService: SocketService) {
       this.joystick = new Joystick();
   }
 
@@ -41,6 +41,7 @@ export class AppComponent {
       if (this.keys.indexOf(key) >= 0) {
           const side = this.pads[key].side;
           this.joystick[side] = 0;
+          this.socketService.send(this.joystick);
           console.log(this.joystick)
       }
   }
@@ -54,6 +55,7 @@ export class AppComponent {
 
           if (previous !== current) {
               this.joystick[side] = current;
+              this.socketService.send(this.joystick);
               console.log(this.joystick)
           }
       }
