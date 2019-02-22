@@ -1,0 +1,7 @@
+div {
+    padding: 0.5em;
+    border: 1px solid grey;
+    border-radius: 3px;
+    margin: 0.5em;
+    cursor: pointer;
+}

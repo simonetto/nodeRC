@@ -6,13 +6,15 @@ import { AppComponent } from './app.component';
 import { ViewerComponent } from './viewer/viewer.component';
 import { ControlComponent } from './control/control.component';
 import { PadsComponent } from './pads/pads.component';
+import { FullScreenComponent } from './full-screen/full-screen.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ViewerComponent,
     ControlComponent,
-    PadsComponent
+    PadsComponent,
+    FullScreenComponent
   ],
   imports: [
     DragDropModule,
