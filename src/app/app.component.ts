@@ -18,19 +18,19 @@ export class AppComponent {
     pads = {
         KeyW : {
             side : 'left',
-            value : -1
+            value : 1
         },
         KeyS : {
             side : 'left',
-            value : 1
+            value : -1
         },
         ArrowUp : {
             side : 'right',
-            value : -1
+            value : 1
         },
         ArrowDown : {
             side : 'right',
-            value : 1
+            value : -1
         }
     }
 
@@ -42,7 +42,6 @@ export class AppComponent {
             const side = this.pads[key].side;
             this.joystick[side] = 0;
             this.socketService.send(this.joystick);
-            console.log(this.joystick)
         }
     }
 
@@ -56,7 +55,6 @@ export class AppComponent {
             if (previous !== current) {
                 this.joystick[side] = current;
                 this.socketService.send(this.joystick);
-                console.log(this.joystick)
             }
         }
     }

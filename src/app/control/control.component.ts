@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import {CdkDrag} from '@angular/cdk/drag-drop';
 import {CdkDragMove, CdkDragEnd} from '@angular/cdk/drag-drop';
 import { Joystick } from '../joystick';
@@ -9,30 +9,31 @@ import { SocketService } from '../socket.service';
     templateUrl: './control.component.html',
     styleUrls: ['./control.component.css']
 })
-export class ControlComponent implements OnInit {
+export class ControlComponent {
     @Input() side: string;
-    joystick;
+    @Input() joystick: Joystick;
+    pressed = [false, false];
 
-    constructor(private socketService: SocketService) {
-        this.joystick = new Joystick();
-    }
+    constructor(private socketService: SocketService) {}
 
-    onDrop(event: CdkDragEnd) {
-        this.joystick[this.side] = 0;
+    onForward() {
+        this.pressed[0] = true;
+        this.joystick[this.side] = 1;
         this.socketService.send(this.joystick);
     }
 
-    onDrag(event: CdkDragMove) {
-        const previous = this.joystick[this.side];
-        const current = event.delta.y;
-
-        if (previous !== current) {
-            this.joystick[this.side] = current;
-            this.socketService.send(this.joystick);
-            console.log(current)
-        }
+    onBackward() {
+        this.pressed[1] = true;
+        this.joystick[this.side] = -1;
+        this.socketService.send(this.joystick);
     }
 
-    ngOnInit() {}
+    onRelease(button) {
+        this.pressed[button] = false;
 
+        if (!this.pressed[0] && !this.pressed[1]) {
+            this.joystick[this.side] = 0;
+            this.socketService.send(this.joystick);
+        }
+    }
 }

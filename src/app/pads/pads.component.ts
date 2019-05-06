@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Joystick } from '../joystick';
 
 @Component({
     selector: 'app-pads',
@@ -7,8 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PadsComponent implements OnInit {
     pads = ['left', 'right'];
+    joystick;
 
-    constructor() { }
+    constructor() {
+        this.joystick = new Joystick();
+    }
 
     ngOnInit() {
     }

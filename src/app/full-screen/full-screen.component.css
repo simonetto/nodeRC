@@ -4,4 +4,6 @@ div {
     border-radius: 3px;
     margin: 0.5em;
     cursor: pointer;
+    color: white;
+    background-color: rgba(255, 255, 255, 0.3);
 }

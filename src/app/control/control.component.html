@@ -1,9 +1,16 @@
-<section class="outer"
-         cdkDropList>
-    <div class="inner"
-         cdkDragBoundary=".outer"
-         cdkDrag cdkDragLockAxis="y"
-         (cdkDragMoved)="onDrag($event)"
-         (cdkDragEnded)="onDrop($event)">
+<section>
+    <div (mousedown)="onForward()"
+         (touchstart)="onForward()"
+         (touchend)="onRelease(0)"
+         (mouseup)="onRelease(0)"
+         class="btn">
+        ▲
+    </div>
+    <div (mousedown)="onBackward()"
+         (touchstart)="onBackward()"
+         (touchend)="onRelease(1)"
+         (mouseup)="onRelease(1)"
+         class="btn">
+        ▼
     </div>
 </section>
